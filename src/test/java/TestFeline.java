@@ -20,9 +20,15 @@ public class TestFeline {
     Feline feline = new Feline();
 
     @Test
-    public void felineEatsMeat() throws Exception {
-        Mockito.when(feline.getFood(ANIMAL_KIND)).thenReturn(FELINE_MEALS);
-        Assert.assertEquals(FELINE_MEALS, feline.eatMeat());
+    public void felineEatsMeat() {
+        try {
+            Mockito.when(feline.getFood(ANIMAL_KIND)).thenReturn(FELINE_MEALS);
+            Assert.assertEquals(FELINE_MEALS, feline.eatMeat());
+        } catch (Exception exception) {
+            throw new AssertionError("Неправильный параметр при вызове " +
+                    "feline.getFood(String animalKind) :" + exception.getMessage());
+        }
+
     }
 
     /* Здесь не использован шпион feline, потому что для
