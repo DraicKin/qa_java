@@ -20,15 +20,9 @@ public class TestFeline {
     Feline feline = new Feline();
 
     @Test
-    public void felineEatsMeat() {
-        try {
-            Mockito.when(feline.getFood(ANIMAL_KIND)).thenReturn(FELINE_MEALS);
-            Assert.assertEquals(FELINE_MEALS, feline.eatMeat());
-        } catch (Exception exception) {
-            throw new AssertionError("Неправильный параметр при вызове " +
-                    "feline.getFood(String animalKind) :" + exception.getMessage());
-        }
-
+    public void felineEatsMeat() throws Exception{
+        Mockito.when(feline.getFood(ANIMAL_KIND)).thenReturn(FELINE_MEALS);
+        Assert.assertEquals("Ошибка в получении списка еды для кошачьих", FELINE_MEALS, feline.eatMeat());
     }
 
     /* Здесь не использован шпион feline, потому что для
@@ -37,22 +31,23 @@ public class TestFeline {
     @Test
     public void felineGetsFamily() {
         Feline feline1 = new Feline();
-        Assert.assertEquals(ANIMAL_FAMILY, feline1.getFamily());
+        Assert.assertEquals("Ошибка определения семейства", ANIMAL_FAMILY, feline1.getFamily());
     }
 
     @Test
     public void felineOneKittenCount() {
         Mockito.when(feline.getKittens(Mockito.anyInt())).thenReturn(1);
-        Assert.assertEquals(1, feline.getKittens());
+        Assert.assertEquals("Ошибка при определении количества котят без параметров",
+                1, feline.getKittens());
     }
 
-     /* Здесь не использован шпион feline, потому что для
-    тестирования метода int getKittens(int kittensCount) это не требуется -
-    там нет зависимостей. */
+    /* Здесь не использован шпион feline, потому что для
+   тестирования метода int getKittens(int kittensCount) это не требуется -
+   там нет зависимостей. */
     @Test
     public void felineKittensCount() {
         Feline feline1 = new Feline();
-        Assert.assertEquals(KITTENS, feline1.getKittens(KITTENS));
+        Assert.assertEquals("Ошибка при определении количества котят", KITTENS, feline1.getKittens(KITTENS));
     }
 
 }

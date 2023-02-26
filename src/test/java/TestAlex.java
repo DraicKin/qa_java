@@ -16,35 +16,25 @@ public class TestAlex {
     Feline feline;
 
     @Test
-    public void getsFriendsOfAlex() {
-        try {
-            LionAlex alex = new LionAlex(feline);
-            Assert.assertEquals(List.of("Марти", "Глория", "Мелман"), alex.getFriends());
-        } catch (Exception exception) {
-            throw new AssertionError("Ошибка при инициализации Алекса!");
-        }
+    public void getsFriendsOfAlex() throws Exception {
+        LionAlex alex = new LionAlex(feline);
+        Assert.assertEquals("Неверный список друзей у Алекса!",
+                List.of("Марти", "Глория", "Мелман"),
+                alex.getFriends()
+        );
     }
 
     @Test
-    public void getsPlaceOfLivingZoo() {
-        try {
-            String place = "Ньюйоркский зоопарк";
-            LionAlex alex = new LionAlex(feline);
-            Assert.assertEquals(place, alex.getPlaceOfliving());
-        } catch (Exception exception) {
-            throw new AssertionError("Ошибка при инициализации Алекса!");
-        }
+    public void getsPlaceOfLivingZoo() throws Exception {
+        String place = "Ньюйоркский зоопарк";
+        LionAlex alex = new LionAlex(feline);
+        Assert.assertEquals("Неверное место жительства Алекса!", place, alex.getPlaceOfliving());
     }
 
     @Test
-    public void kittenCountTest() {
-        try {
-            LionAlex alex = new LionAlex(feline);
-            Mockito.when(feline.getKittens(Mockito.anyInt())).thenReturn(0);
-            Assert.assertEquals(0, alex.getKittens());
-        } catch (Exception exception) {
-            throw new AssertionError("Ошибка при инициализации Алекса!");
-        }
-
+    public void kittenCountTest() throws Exception {
+        LionAlex alex = new LionAlex(feline);
+        Mockito.when(feline.getKittens(Mockito.anyInt())).thenReturn(0);
+        Assert.assertEquals("Неверное число детей Алекса!", 0, alex.getKittens());
     }
 }

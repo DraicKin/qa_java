@@ -19,14 +19,15 @@ public class TestCat {
         final String CAT_SOUND = "Мяу";
         Cat cat = new Cat(feline);
         String catSays = cat.getSound();
-        Assert.assertEquals("This cat says " + catSays + "but it was expected to say " + CAT_SOUND, CAT_SOUND, catSays);
+        Assert.assertEquals(String.format("Эта кошка говорит %s, но должна бы сказать %s", catSays, CAT_SOUND),
+                CAT_SOUND, catSays);
     }
     @Test
     public void catGetsFood() throws Exception {
         List<String> meals = List.of("Животные", "Птицы", "Рыба");
         Cat cat = new Cat(feline);
         Mockito.when(feline.eatMeat()).thenReturn(meals);
-        Assert.assertEquals("This cat eats " + cat.getFood().toString() + "but it was expected to eat " +
+        Assert.assertEquals("Эта кошка ест" + cat.getFood().toString() + "но должна есть " +
                 meals, meals, cat.getFood());
     }
 }

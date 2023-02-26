@@ -18,8 +18,8 @@ public class TestLion {
 
     private final String EXCEPTION_TEXT = "Используйте допустимые значения пола животного - самей или самка";
     Feline feline = Mockito.mock(Feline.class);
-    String sex;
-    boolean hasManeExpected;
+    private String sex;
+    private boolean hasManeExpected;
 
     public TestLion(String sex, boolean hasManeExpected){
         this.sex = sex;
@@ -39,9 +39,9 @@ public class TestLion {
     public void testHasMane() {
         try {
             Lion lion = new Lion(sex, feline);
-            Assert.assertEquals(hasManeExpected, lion.doesHaveMane());
+            Assert.assertEquals("Неверно определено наличие гривы", hasManeExpected, lion.doesHaveMane());
         } catch (Exception exception) {
-            Assert.assertEquals(EXCEPTION_TEXT, exception.getMessage());
+            Assert.assertEquals("Неверный текст ошибки", EXCEPTION_TEXT, exception.getMessage());
         }
     }
 
@@ -51,9 +51,9 @@ public class TestLion {
         try {
             Lion lion = new Lion(sex, feline);
             Mockito.when(feline.getKittens()).thenReturn(KITTENS);
-            Assert.assertEquals(KITTENS, lion.getKittens());
+            Assert.assertEquals("Неверно определено количество котят", KITTENS, lion.getKittens());
         } catch (Exception exception) {
-            Assert.assertEquals(EXCEPTION_TEXT, exception.getMessage());
+            Assert.assertEquals("Неверный текст ошибки", EXCEPTION_TEXT, exception.getMessage());
         }
     }
 
@@ -64,7 +64,7 @@ public class TestLion {
             lion.getFood();
             Mockito.verify(feline).getFood("Хищник");
         } catch (Exception exception) {
-            Assert.assertEquals(EXCEPTION_TEXT, exception.getMessage());
+            Assert.assertEquals("Неверный текст ошибки", EXCEPTION_TEXT, exception.getMessage());
         }
     }
 }
